@@ -14,42 +14,39 @@
 }
 
 body{
-    background:#f4f7fb;
-    min-height:100vh;
-    padding:40px;
+    background:#f4f6f9;
+}
+
+header{
+    background:#2563eb;
+    color:white;
+    text-align:center;
+    padding:25px;
 }
 
 .container{
     max-width:1100px;
     margin:auto;
+    padding:20px;
+}
+
+.card{
     background:white;
-    border-radius:15px;
-    padding:30px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.1);
-}
-
-header{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-header h1{
-    color:#2563eb;
-    margin-bottom:10px;
-}
-
-header p{
-    color:#666;
-}
-
-.form-group{
+    padding:20px;
+    border-radius:12px;
     margin-bottom:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    color:#2563eb;
+    margin-bottom:15px;
 }
 
 label{
     display:block;
-    font-weight:600;
     margin-bottom:8px;
+    font-weight:bold;
 }
 
 select,
@@ -57,8 +54,8 @@ textarea{
     width:100%;
     padding:12px;
     border:1px solid #ccc;
-    border-radius:10px;
-    font-size:15px;
+    border-radius:8px;
+    margin-bottom:15px;
 }
 
 textarea{
@@ -67,207 +64,272 @@ textarea{
 }
 
 button{
-    width:100%;
-    padding:14px;
-    border:none;
     background:#2563eb;
     color:white;
-    font-size:16px;
-    border-radius:10px;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
     cursor:pointer;
-    transition:0.3s;
+    width:100%;
+    font-size:16px;
 }
 
 button:hover{
     background:#1d4ed8;
 }
 
-.results{
-    margin-top:30px;
+.result-card{
     display:none;
-}
-
-.card{
-    background:#eef4ff;
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:20px;
-}
-
-.card h2{
-    color:#2563eb;
-    margin-bottom:10px;
-}
-
-.card p{
-    line-height:1.7;
 }
 
 ul{
     padding-left:20px;
 }
 
-footer{
+.footer{
     text-align:center;
-    margin-top:25px;
-    color:#777;
-}
-
-.badge{
-    background:#2563eb;
-    color:white;
-    padding:4px 10px;
-    border-radius:20px;
-    font-size:12px;
-}
-
-@media(max-width:768px){
-    body{
-        padding:15px;
-    }
+    padding:20px;
+    color:#666;
 }
 </style>
+
 </head>
-
 <body>
-
-<div class="container">
 
 <header>
     <h1>🤖 Code Explainer AI</h1>
     <p>AI-Powered Educational Technology Project</p>
-    <br>
-    <span class="badge">Developed By Smeara</span>
 </header>
 
-<div class="form-group">
-    <label>Select Programming Language</label>
-    <select id="language">
-        <option>Python</option>
-        <option>Java</option>
-        <option>JavaScript</option>
-        <option>C++</option>
-        <option>C#</option>
-        <option>PHP</option>
-    </select>
-</div>
+<div class="container">
 
-<div class="form-group">
-    <label>Paste Code Snippet</label>
-    <textarea
-        id="codeInput"
-        placeholder="Paste your code here..."
-    ></textarea>
-</div>
-
-<button onclick="analyzeCode()">
-    Explain Code
-</button>
-
-<div class="results" id="results">
-
+    <!-- Home Screen -->
     <div class="card">
-        <h2>📄 Code Summary</h2>
+        <h2>Home Screen</h2>
+
+        <label>Select Programming Language</label>
+
+        <select id="language">
+            <option>Python</option>
+            <option>Java</option>
+            <option>JavaScript</option>
+            <option>C++</option>
+            <option>C#</option>
+            <option>PHP</option>
+        </select>
+
+        <label>Paste Code</label>
+
+        <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
+
+        <button onclick="analyzeCode()">
+            Analyze Code
+        </button>
+    </div>
+
+    <!-- Results Screen -->
+    <div class="card result-card" id="results">
+
+        <h2>Results Dashboard</h2>
+
+        <h3>📄 Code Summary</h3>
         <p id="summary"></p>
-    </div>
 
-    <div class="card">
-        <h2>📚 Line-by-Line Explanation</h2>
-        <p id="explanation"></p>
-    </div>
+        <br>
 
-    <div class="card">
-        <h2>🧠 Logic Breakdown</h2>
+        <h3>📚 Line-by-Line Explanation</h3>
+        <div id="lineExplanation"></div>
+
+        <br>
+
+        <h3>🧠 Logic Breakdown</h3>
         <p id="logic"></p>
-    </div>
 
-    <div class="card">
-        <h2>🚀 Improvement Suggestions</h2>
+        <br>
+
+        <h3>🚀 Improvement Suggestions</h3>
         <ul id="suggestions"></ul>
+
+        <br>
+
+        <h3>⚠ Potential Error Detection</h3>
+        <ul id="errors"></ul>
+
     </div>
 
+    <!-- About Screen -->
     <div class="card">
-        <h2>⚠ Potential Error Detection</h2>
-        <p id="errors"></p>
+
+        <h2>About Project</h2>
+
+        <p>
+            Code Explainer AI is an educational web application that helps
+            students and developers understand source code through automated
+            explanations, summaries, logic breakdowns, suggestions, and
+            basic bug detection insights.
+        </p>
+
+        <br>
+
+        <h3>Features</h3>
+
+        <ul>
+            <li>Code Explanation</li>
+            <li>Code Summary</li>
+            <li>Logic Breakdown</li>
+            <li>Learning Assistance</li>
+            <li>Improvement Suggestions</li>
+            <li>Error Detection</li>
+            <li>Multi-Language Support</li>
+        </ul>
+
     </div>
 
 </div>
 
-<footer>
-    Code Explainer AI • One Page Demo Application
-</footer>
-
+<div class="footer">
+    Developed By Smeara
 </div>
 
 <script>
 
 function analyzeCode(){
 
-    const language =
+    let language =
         document.getElementById("language").value;
 
-    const code =
+    let code =
         document.getElementById("codeInput").value;
 
-    if(code.trim()===""){
-        alert("Please paste some code.");
+    if(code.trim() === ""){
+        alert("Please paste some code first.");
         return;
     }
 
-    const lines =
-        code.split("\n");
+    let lines = code.split("\n");
 
-    let explanationText = "";
+    // Summary
+    document.getElementById("summary").innerHTML =
+        `The uploaded ${language} code contains approximately
+        ${lines.length} lines. The system analyzed the structure
+        and generated learning insights.`;
+
+    // Line Explanation
+    let explanation = "";
 
     lines.forEach((line,index)=>{
-        if(line.trim()!==""){
-            explanationText +=
-            "Line " + (index+1) +
-            ": " +
-            line.replace(/</g,"&lt;")
-                .replace(/>/g,"&gt;")
-            +
-            "<br>";
+
+        let text = line.trim();
+
+        if(text==="") return;
+
+        if(text.includes("for")){
+            explanation +=
+            `<p><b>Line ${index+1}</b> : Loop detected. The code repeats a task multiple times.</p>`;
         }
+
+        else if(text.includes("while")){
+            explanation +=
+            `<p><b>Line ${index+1}</b> : While loop detected for repeated execution.</p>`;
+        }
+
+        else if(text.includes("if")){
+            explanation +=
+            `<p><b>Line ${index+1}</b> : Conditional statement detected.</p>`;
+        }
+
+        else if(text.includes("function") || text.includes("def ")){
+            explanation +=
+            `<p><b>Line ${index+1}</b> : Function definition detected.</p>`;
+        }
+
+        else if(text.includes("=")){
+            explanation +=
+            `<p><b>Line ${index+1}</b> : Variable assignment detected.</p>`;
+        }
+
+        else{
+            explanation +=
+            `<p><b>Line ${index+1}</b> : General code statement detected.</p>`;
+        }
+
     });
 
-    document.getElementById("summary").innerHTML =
-    `
-    This ${language} code contains approximately
-    <b>${lines.length}</b> lines.
-    The system has analyzed the structure and generated
-    learning insights for beginner developers.
-    `;
+    document.getElementById("lineExplanation").innerHTML =
+        explanation;
 
-    document.getElementById("explanation").innerHTML =
-    explanationText;
+    // Logic Breakdown
+    let logicText =
+        "The program executes instructions sequentially. ";
+
+    if(code.includes("for") || code.includes("while")){
+        logicText +=
+        "Loop structures are used for repetition. ";
+    }
+
+    if(code.includes("if")){
+        logicText +=
+        "Conditional logic is used for decision-making. ";
+    }
+
+    if(code.includes("function") || code.includes("def ")){
+        logicText +=
+        "Functions improve code reusability and organization.";
+    }
 
     document.getElementById("logic").innerHTML =
-    `
-    The application scans the uploaded source code,
-    identifies its structure, and generates educational
-    explanations. A production version would connect to
-    OpenAI API or Gemini API for advanced AI analysis.
-    `;
+        logicText;
+
+    // Suggestions
+    let suggestions = [
+        "Use meaningful variable names.",
+        "Add comments for readability.",
+        "Follow coding standards.",
+        "Avoid duplicate code.",
+        "Handle errors using validation."
+    ];
+
+    let suggestionHTML = "";
+
+    suggestions.forEach(item=>{
+        suggestionHTML += `<li>${item}</li>`;
+    });
 
     document.getElementById("suggestions").innerHTML =
-    `
-    <li>Use meaningful variable names.</li>
-    <li>Add comments to improve readability.</li>
-    <li>Follow standard coding conventions.</li>
-    <li>Reduce duplicate code where possible.</li>
-    <li>Handle unexpected errors properly.</li>
-    `;
+        suggestionHTML;
+
+    // Error Detection
+    let errors = [];
+
+    if(code.includes("== true")){
+        errors.push(
+            "Redundant comparison with true detected."
+        );
+    }
+
+    if(code.includes("var ")){
+        errors.push(
+            "Consider using let or const instead of var."
+        );
+    }
+
+    if(errors.length===0){
+        errors.push(
+            "No major issues detected in this basic analysis."
+        );
+    }
+
+    let errorHTML = "";
+
+    errors.forEach(item=>{
+        errorHTML += `<li>${item}</li>`;
+    });
 
     document.getElementById("errors").innerHTML =
-    `
-    No critical issues detected in this demo.
-    In a full AI implementation, syntax and logical
-    errors would be highlighted automatically.
-    `;
+        errorHTML;
 
     document.getElementById("results").style.display =
-    "block";
+        "block";
 }
 
 </script>
