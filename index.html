@@ -7,329 +7,387 @@
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
 }
 
 body{
-    background:#f4f6f9;
+background:#f4f7fb;
+color:#333;
 }
 
 header{
-    background:#2563eb;
-    color:white;
-    text-align:center;
-    padding:25px;
+background:#2563eb;
+color:white;
+padding:25px;
+text-align:center;
+}
+
+header h1{
+margin-bottom:10px;
 }
 
 .container{
-    max-width:1100px;
-    margin:auto;
-    padding:20px;
+max-width:1200px;
+margin:auto;
+padding:20px;
 }
 
 .card{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+margin-bottom:20px;
 }
 
 h2{
-    color:#2563eb;
-    margin-bottom:15px;
+color:#2563eb;
+margin-bottom:15px;
 }
 
-label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:bold;
-}
-
-select,
-textarea{
-    width:100%;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    margin-bottom:15px;
+select,textarea{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+margin-top:8px;
+margin-bottom:15px;
 }
 
 textarea{
-    min-height:250px;
-    resize:vertical;
+height:250px;
+resize:vertical;
 }
 
 button{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:8px;
-    cursor:pointer;
-    width:100%;
-    font-size:16px;
+background:#2563eb;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+margin-right:10px;
+margin-top:10px;
 }
 
 button:hover{
-    background:#1d4ed8;
+background:#1e4ed8;
 }
 
-.result-card{
-    display:none;
+.metrics{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+}
+
+.metric{
+background:#eef4ff;
+padding:15px;
+border-radius:10px;
+text-align:center;
+}
+
+.metric h3{
+color:#2563eb;
+}
+
+.hidden{
+display:none;
 }
 
 ul{
-    padding-left:20px;
+padding-left:20px;
 }
 
-.footer{
-    text-align:center;
-    padding:20px;
-    color:#666;
+.workflow{
+text-align:center;
+font-weight:bold;
+line-height:2;
+}
+
+footer{
+text-align:center;
+padding:20px;
+color:#666;
 }
 </style>
-
 </head>
+
 <body>
 
 <header>
-    <h1>🤖 Code Explainer AI</h1>
-    <p>AI-Powered Educational Technology Project</p>
+<h1>🤖 Code Explainer AI</h1>
+<p>AI-Powered Educational Technology Project</p>
 </header>
 
 <div class="container">
 
-    <!-- Home Screen -->
-    <div class="card">
-        <h2>Home Screen</h2>
+<div class="card">
+<h2>Home Screen</h2>
 
-        <label>Select Programming Language</label>
+<label>Select Programming Language</label>
+<select id="language">
+<option>Python</option>
+<option>JavaScript</option>
+<option>Java</option>
+<option>C++</option>
+<option>C#</option>
+<option>PHP</option>
+</select>
 
-        <select id="language">
-            <option>Python</option>
-            <option>Java</option>
-            <option>JavaScript</option>
-            <option>C++</option>
-            <option>C#</option>
-            <option>PHP</option>
-        </select>
+<label>Paste Code</label>
+<textarea id="codeInput" placeholder="Paste code here..."></textarea>
 
-        <label>Paste Code</label>
+<button onclick="loadExample()">Load Example</button>
+<button onclick="analyzeCode()">Analyze Code</button>
+</div>
 
-        <textarea id="codeInput" placeholder="Paste your code here..."></textarea>
+<div class="card hidden" id="dashboard">
 
-        <button onclick="analyzeCode()">
-            Analyze Code
-        </button>
-    </div>
+<h2>Analysis Dashboard</h2>
 
-    <!-- Results Screen -->
-    <div class="card result-card" id="results">
+<div class="metrics">
 
-        <h2>Results Dashboard</h2>
+<div class="metric">
+<h3 id="lineCount">0</h3>
+<p>Lines</p>
+</div>
 
-        <h3>📄 Code Summary</h3>
-        <p id="summary"></p>
+<div class="metric">
+<h3 id="functionCount">0</h3>
+<p>Functions</p>
+</div>
 
-        <br>
+<div class="metric">
+<h3 id="loopCount">0</h3>
+<p>Loops</p>
+</div>
 
-        <h3>📚 Line-by-Line Explanation</h3>
-        <div id="lineExplanation"></div>
-
-        <br>
-
-        <h3>🧠 Logic Breakdown</h3>
-        <p id="logic"></p>
-
-        <br>
-
-        <h3>🚀 Improvement Suggestions</h3>
-        <ul id="suggestions"></ul>
-
-        <br>
-
-        <h3>⚠ Potential Error Detection</h3>
-        <ul id="errors"></ul>
-
-    </div>
-
-    <!-- About Screen -->
-    <div class="card">
-
-        <h2>About Project</h2>
-
-        <p>
-            Code Explainer AI is an educational web application that helps
-            students and developers understand source code through automated
-            explanations, summaries, logic breakdowns, suggestions, and
-            basic bug detection insights.
-        </p>
-
-        <br>
-
-        <h3>Features</h3>
-
-        <ul>
-            <li>Code Explanation</li>
-            <li>Code Summary</li>
-            <li>Logic Breakdown</li>
-            <li>Learning Assistance</li>
-            <li>Improvement Suggestions</li>
-            <li>Error Detection</li>
-            <li>Multi-Language Support</li>
-        </ul>
-
-    </div>
+<div class="metric">
+<h3 id="conditionCount">0</h3>
+<p>Conditions</p>
+</div>
 
 </div>
 
-<div class="footer">
-    Developed By Smeara
+<br>
+
+<h3>📄 Code Summary</h3>
+<p id="summary"></p>
+
+<br>
+
+<h3>📚 Line By Line Explanation</h3>
+<div id="explanation"></div>
+
+<br>
+
+<h3>🧠 Logic Breakdown</h3>
+<p id="logic"></p>
+
+<br>
+
+<h3>🚀 Suggestions</h3>
+<ul id="suggestions"></ul>
+
+<br>
+
+<h3>⚠ Error Detection</h3>
+<ul id="errors"></ul>
+
 </div>
+
+<div class="card">
+<h2>System Workflow</h2>
+
+<div class="workflow">
+User Input<br>
+↓<br>
+Code Parser<br>
+↓<br>
+Analysis Engine<br>
+↓<br>
+Explanation Generator<br>
+↓<br>
+Results Dashboard
+</div>
+
+</div>
+
+<div class="card">
+<h2>About Project</h2>
+
+<p>
+Code Explainer AI helps students and beginner developers understand
+source code through automated explanations, summaries,
+logic breakdowns, suggestions, and error detection insights.
+</p>
+
+<br>
+
+<h3>Target Users</h3>
+
+<ul>
+<li>Programming Students</li>
+<li>Beginner Developers</li>
+<li>Software Engineering Interns</li>
+<li>Coding Bootcamp Learners</li>
+<li>Developers learning new codebases</li>
+</ul>
+
+</div>
+
+</div>
+
+<footer>
+Developed By Smeara
+</footer>
 
 <script>
 
+function loadExample(){
+
+const lang=document.getElementById("language").value;
+
+if(lang==="Python"){
+document.getElementById("codeInput").value=
+`def greet(name):
+    print("Hello",name)
+
+for i in range(3):
+    greet("User")`;
+}
+
+else if(lang==="JavaScript"){
+document.getElementById("codeInput").value=
+`function greet(name){
+ console.log("Hello "+name);
+}
+
+for(let i=0;i<3;i++){
+ greet("User");
+}`;
+}
+
+else{
+document.getElementById("codeInput").value=
+`int a = 10;
+if(a > 5){
+   System.out.println(a);
+}`;
+}
+
+}
+
 function analyzeCode(){
 
-    let language =
-        document.getElementById("language").value;
+let code=document.getElementById("codeInput").value;
 
-    let code =
-        document.getElementById("codeInput").value;
+if(code.trim()===""){
+alert("Please enter code");
+return;
+}
 
-    if(code.trim() === ""){
-        alert("Please paste some code first.");
-        return;
-    }
+let lines=code.split("\n");
 
-    let lines = code.split("\n");
+let functions=0;
+let loops=0;
+let conditions=0;
 
-    // Summary
-    document.getElementById("summary").innerHTML =
-        `The uploaded ${language} code contains approximately
-        ${lines.length} lines. The system analyzed the structure
-        and generated learning insights.`;
+let explanation="";
 
-    // Line Explanation
-    let explanation = "";
+lines.forEach((line,index)=>{
 
-    lines.forEach((line,index)=>{
+let text=line.trim();
 
-        let text = line.trim();
+if(text.includes("def ") || text.includes("function")){
+functions++;
 
-        if(text==="") return;
+explanation +=
+`<p><b>Line ${index+1}</b> : Function declaration detected.</p>`;
+}
 
-        if(text.includes("for")){
-            explanation +=
-            `<p><b>Line ${index+1}</b> : Loop detected. The code repeats a task multiple times.</p>`;
-        }
+else if(text.includes("for") || text.includes("while")){
+loops++;
 
-        else if(text.includes("while")){
-            explanation +=
-            `<p><b>Line ${index+1}</b> : While loop detected for repeated execution.</p>`;
-        }
+explanation +=
+`<p><b>Line ${index+1}</b> : Loop detected for repetition.</p>`;
+}
 
-        else if(text.includes("if")){
-            explanation +=
-            `<p><b>Line ${index+1}</b> : Conditional statement detected.</p>`;
-        }
+else if(text.includes("if")){
+conditions++;
 
-        else if(text.includes("function") || text.includes("def ")){
-            explanation +=
-            `<p><b>Line ${index+1}</b> : Function definition detected.</p>`;
-        }
+explanation +=
+`<p><b>Line ${index+1}</b> : Conditional statement detected.</p>`;
+}
 
-        else if(text.includes("=")){
-            explanation +=
-            `<p><b>Line ${index+1}</b> : Variable assignment detected.</p>`;
-        }
+else if(text.includes("=")){
+explanation +=
+`<p><b>Line ${index+1}</b> : Variable assignment detected.</p>`;
+}
 
-        else{
-            explanation +=
-            `<p><b>Line ${index+1}</b> : General code statement detected.</p>`;
-        }
+else{
+explanation +=
+`<p><b>Line ${index+1}</b> : General code statement.</p>`;
+}
 
-    });
+});
 
-    document.getElementById("lineExplanation").innerHTML =
-        explanation;
+document.getElementById("lineCount").innerText=
+lines.length;
 
-    // Logic Breakdown
-    let logicText =
-        "The program executes instructions sequentially. ";
+document.getElementById("functionCount").innerText=
+functions;
 
-    if(code.includes("for") || code.includes("while")){
-        logicText +=
-        "Loop structures are used for repetition. ";
-    }
+document.getElementById("loopCount").innerText=
+loops;
 
-    if(code.includes("if")){
-        logicText +=
-        "Conditional logic is used for decision-making. ";
-    }
+document.getElementById("conditionCount").innerText=
+conditions;
 
-    if(code.includes("function") || code.includes("def ")){
-        logicText +=
-        "Functions improve code reusability and organization.";
-    }
+document.getElementById("summary").innerHTML=
+`The uploaded program contains ${lines.length} lines of code.
+The analyzer detected ${functions} function(s),
+${loops} loop(s), and ${conditions} conditional statement(s).`;
 
-    document.getElementById("logic").innerHTML =
-        logicText;
+document.getElementById("explanation").innerHTML=
+explanation;
 
-    // Suggestions
-    let suggestions = [
-        "Use meaningful variable names.",
-        "Add comments for readability.",
-        "Follow coding standards.",
-        "Avoid duplicate code.",
-        "Handle errors using validation."
-    ];
+document.getElementById("logic").innerHTML=
+`The application scans the code structure, identifies functions,
+loops, variables and conditions, then generates educational insights.`;
 
-    let suggestionHTML = "";
+document.getElementById("suggestions").innerHTML=
+`
+<li>Use meaningful variable names.</li>
+<li>Add comments for readability.</li>
+<li>Avoid duplicated code.</li>
+<li>Follow coding standards.</li>
+<li>Handle errors using validation.</li>
+`;
 
-    suggestions.forEach(item=>{
-        suggestionHTML += `<li>${item}</li>`;
-    });
+let errors=[];
 
-    document.getElementById("suggestions").innerHTML =
-        suggestionHTML;
+if(code.includes("== true")){
+errors.push("Avoid comparing boolean values with true.");
+}
 
-    // Error Detection
-    let errors = [];
+if(code.includes("var ")){
+errors.push("Use let or const instead of var.");
+}
 
-    if(code.includes("== true")){
-        errors.push(
-            "Redundant comparison with true detected."
-        );
-    }
+if(errors.length===0){
+errors.push("No major issues detected.");
+}
 
-    if(code.includes("var ")){
-        errors.push(
-            "Consider using let or const instead of var."
-        );
-    }
+document.getElementById("errors").innerHTML=
+errors.map(e=>`<li>${e}</li>`).join("");
 
-    if(errors.length===0){
-        errors.push(
-            "No major issues detected in this basic analysis."
-        );
-    }
+document.getElementById("dashboard").classList.remove("hidden");
 
-    let errorHTML = "";
-
-    errors.forEach(item=>{
-        errorHTML += `<li>${item}</li>`;
-    });
-
-    document.getElementById("errors").innerHTML =
-        errorHTML;
-
-    document.getElementById("results").style.display =
-        "block";
 }
 
 </script>
