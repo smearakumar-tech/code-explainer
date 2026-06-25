@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Explainer AI</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    min-height:100vh;
+    padding:40px;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+header h1{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+header p{
+    color:#666;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:250px;
+    resize:vertical;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.results{
+    margin-top:30px;
+    display:none;
+}
+
+.card{
+    background:#eef4ff;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.card h2{
+    color:#2563eb;
+    margin-bottom:10px;
+}
+
+.card p{
+    line-height:1.7;
+}
+
+ul{
+    padding-left:20px;
+}
+
+footer{
+    text-align:center;
+    margin-top:25px;
+    color:#777;
+}
+
+.badge{
+    background:#2563eb;
+    color:white;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+@media(max-width:768px){
+    body{
+        padding:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <h1>🤖 Code Explainer AI</h1>
+    <p>AI-Powered Educational Technology Project</p>
+    <br>
+    <span class="badge">Developed By Smeara</span>
+</header>
+
+<div class="form-group">
+    <label>Select Programming Language</label>
+    <select id="language">
+        <option>Python</option>
+        <option>Java</option>
+        <option>JavaScript</option>
+        <option>C++</option>
+        <option>C#</option>
+        <option>PHP</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label>Paste Code Snippet</label>
+    <textarea
+        id="codeInput"
+        placeholder="Paste your code here..."
+    ></textarea>
+</div>
+
+<button onclick="analyzeCode()">
+    Explain Code
+</button>
+
+<div class="results" id="results">
+
+    <div class="card">
+        <h2>📄 Code Summary</h2>
+        <p id="summary"></p>
+    </div>
+
+    <div class="card">
+        <h2>📚 Line-by-Line Explanation</h2>
+        <p id="explanation"></p>
+    </div>
+
+    <div class="card">
+        <h2>🧠 Logic Breakdown</h2>
+        <p id="logic"></p>
+    </div>
+
+    <div class="card">
+        <h2>🚀 Improvement Suggestions</h2>
+        <ul id="suggestions"></ul>
+    </div>
+
+    <div class="card">
+        <h2>⚠ Potential Error Detection</h2>
+        <p id="errors"></p>
+    </div>
+
+</div>
+
+<footer>
+    Code Explainer AI • One Page Demo Application
+</footer>
+
+</div>
+
+<script>
+
+function analyzeCode(){
+
+    const language =
+        document.getElementById("language").value;
+
+    const code =
+        document.getElementById("codeInput").value;
+
+    if(code.trim()===""){
+        alert("Please paste some code.");
+        return;
+    }
+
+    const lines =
+        code.split("\n");
+
+    let explanationText = "";
+
+    lines.forEach((line,index)=>{
+        if(line.trim()!==""){
+            explanationText +=
+            "Line " + (index+1) +
+            ": " +
+            line.replace(/</g,"&lt;")
+                .replace(/>/g,"&gt;")
+            +
+            "<br>";
+        }
+    });
+
+    document.getElementById("summary").innerHTML =
+    `
+    This ${language} code contains approximately
+    <b>${lines.length}</b> lines.
+    The system has analyzed the structure and generated
+    learning insights for beginner developers.
+    `;
+
+    document.getElementById("explanation").innerHTML =
+    explanationText;
+
+    document.getElementById("logic").innerHTML =
+    `
+    The application scans the uploaded source code,
+    identifies its structure, and generates educational
+    explanations. A production version would connect to
+    OpenAI API or Gemini API for advanced AI analysis.
+    `;
+
+    document.getElementById("suggestions").innerHTML =
+    `
+    <li>Use meaningful variable names.</li>
+    <li>Add comments to improve readability.</li>
+    <li>Follow standard coding conventions.</li>
+    <li>Reduce duplicate code where possible.</li>
+    <li>Handle unexpected errors properly.</li>
+    `;
+
+    document.getElementById("errors").innerHTML =
+    `
+    No critical issues detected in this demo.
+    In a full AI implementation, syntax and logical
+    errors would be highlighted automatically.
+    `;
+
+    document.getElementById("results").style.display =
+    "block";
+}
+
+</script>
+
+</body>
+</html>
