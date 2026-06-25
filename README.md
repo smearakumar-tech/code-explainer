@@ -12,42 +12,31 @@ Many students, beginner developers, and software engineering bootcamp learners s
 ---
 
 ## 🖥️ Core Screens Architecture
-The application layout features a clean Single-Page Application (SPA) view-switching system consisting of the following 4 core screens:
+The application is structured into 4 foundational screens built explicitly into the interface:
 
-1. **Home Screen**: Handles project introduction, programming language selection, code input area, and the analyze trigger button.
-2. **Code Analysis Screen**: Displays code processing status and active analysis progress animations.
+1. **Home Screen**: Features a project introduction, programming language selection selection box, a code input canvas area, and the action analyze button.
+2. **Code Analysis Screen**: Displays the current code processing status and active analysis progress tracking metrics.
 3. **Results Screen**: Displays the Code Summary, Line-by-Line Explanation, Logic Breakdown, Improvement Suggestions, and Error Detection Insights.
-4. **About Screen**: Displays the comprehensive Project Overview, Features, Technology Stack, and Developer Information.
+4. **About Screen**: Displays the comprehensive Project Overview, Features list, Technology Stack details, and Developer Information.
 
 ---
 
 ## 📊 Core Data Model (Entity: CodeSnippet)
-The system structures and maps incoming code snippets using these exact data parameters:
-
-* `snippet_id` (String) - Unique programmatic tracking identification string.
-* `programming_language` (String) - Selected evaluation language (Python, Java, JavaScript, C++, C#, PHP).
-* `code_content` (Text) - Raw source code content string pasted by the user.
-* `explanation` (Text) - High-level functional summary and system purpose summary.
-* `analysis_result` (Text) - Detailed internal mechanics and line-by-line code logic.
-* `suggestions` (Text) - Code quality enhancement tips and optimization recommendations.
-* `errors_detected` (Text) - Syntactic flaws, logical exceptions, or clean status reports.
-* `uploaded_date` (DateTime) - Accurate system timestamp of the submission request.
-* `user_id` (String) - Developer profile identification tracking key.
+The application handles code management utilizing these exact structured schema fields:
+- `snippet_id` (String) - Unique programmatic tracking identification string.
+- `programming_language` (String) - Selected evaluation language (Python, Java, JavaScript, C++, C#, PHP).
+- `code_content` (Text) - Raw source code content string pasted by the user.
+- `explanation` (Text) - High-level functional summary and system purpose summary.
+- `analysis_result` (Text) - Detailed internal mechanics and line-by-line code logic.
+- `suggestions` (Text) - Code quality enhancement tips and optimization recommendations.
+- `errors_detected` (Text) - Syntactic flaws, logical exceptions, or clean status reports.
+- `uploaded_date` (DateTime) - Accurate system timestamp of the submission request.
+- `user_id` (String) - Developer profile identification tracking key.
 
 ---
 
 ## 🛠️ Technology Pipeline Architecture
-* **Frontend UI Layer:** Responsive Semantic Web Core Layout (HTML5, Modern CSS3, Native ES6 JavaScript Rendering).
-* **Backend Processing Layer:** Node.js Environment utilizing the Express.js Framework.
-* **Database & Storage Layer:** Supabase Platform infrastructure managed by a PostgreSQL cloud instance.
-* **Cognitive Intelligence Engine:** Hybrid AI API orchestrations via OpenAI API and Gemini API pathways.
-
----
-
-## ⚙️ Core System Workflow
-1. User uploads or pastes source code snippet into the canvas area.
-2. User selects their target programming language from the dropdown menu.
-3. User triggers the AI Analysis Engine.
-4. System switches view to the Code Analysis Screen showing current progress status.
-5. AI processes expressions, variable allocations, conditional statements, and loops.
-6. System renders details dynamically inside the structured Results Screen dashboard.
+- **Frontend Layer:** Responsive Web Application (HTML5, Modern CSS3, Native ES6 JavaScript).
+- **Backend Layers:** Node.js Ecosystem with Express.js Framework platforms.
+- **Database Architecture:** Supabase Cloud Infrastructure powered by PostgreSQL instances.
+- **AI Integration Engine:** OpenAI API Configurations and Gemini API Web Pipeline access ports.
