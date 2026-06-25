@@ -1,145 +1,275 @@
-# Code Explainer AI - one page spec 
+# Code Explainer AI
 
 ## Project Overview
 
-Code Explainer AI is an intelligent web application that helps users understand programming code quickly and easily. Users can paste code snippets in various programming languages, and the AI generates clear, beginner-friendly explanations, making learning and debugging more efficient.
+Code Explainer AI is an AI-powered educational web application that helps users understand programming code quickly and effectively.
+
+Users can paste source code written in various programming languages and receive beginner-friendly explanations, code summaries, logic breakdowns, improvement suggestions, and potential error insights.
+
+The platform is designed to simplify programming education and accelerate the learning process for students and developers.
 
 ---
 
-## Problem Statement
+# Problem Statement
 
-Many students and beginner developers struggle to understand complex code structures, unfamiliar syntax, and programming concepts. Reading documentation or searching for explanations can be time-consuming.
+Many students and beginner developers struggle to understand:
 
-Code Explainer AI simplifies this process by providing instant explanations for any code snippet.
+* Complex code structures
+* Unfamiliar syntax
+* Programming logic
+* Best coding practices
 
----
+Searching through documentation and tutorials can be time-consuming and overwhelming.
 
-## Solution
-
-Code Explainer AI uses Artificial Intelligence to analyze source code and generate:
-
-- Line-by-line explanations
-- Overall code summaries
-- Logic breakdowns
-- Code improvement suggestions
-- Basic bug detection insights
+Code Explainer AI addresses this challenge by providing instant AI-generated explanations and learning assistance for code snippets.
 
 ---
 
-## Target Users
+# Solution
 
-- Programming Students
-- Beginner Developers
-- Software Engineering Interns
-- Coding Bootcamp Learners
-- Developers working with unfamiliar codebases
+The application analyzes source code and automatically generates:
 
----
-
-##  Features
-
-### 1. Code Explanation
-Generate easy-to-understand explanations for uploaded code snippets.
-
-### 2. Multi-Language Support
-Supports programming languages such as:
-- Python
-- Java
-- C++
-- JavaScript
-- C#
-- PHP
-
-### 3. Code Summary
-Provides a concise summary of what the code does.
-
-### 4. Learning Assistance
-Helps users understand programming concepts used in the code.
-
-### 5. Improvement Suggestions
-Suggests best practices and potential optimizations.
+* Line-by-line explanations
+* Overall code summaries
+* Logic flow breakdowns
+* Improvement recommendations
+* Basic bug detection insights
+* Learning-focused programming guidance
 
 ---
 
-## AI Functionality
+# Target Users
 
-### Input
-- Source code snippet
-- Programming language
-
-### Output
-- Line-by-line explanation
-- Code summary
-- Logic breakdown
-- Suggestions for improvement
-- Potential error detection
+* Programming Students
+* Beginner Developers
+* Software Engineering Interns
+* Coding Bootcamp Learners
+* Developers exploring unfamiliar codebases
 
 ---
 
-## Data Model
+# Core Screens
 
-### Entity: CodeSnippet
+## 1. Home Screen
 
-| Field Name | Data Type | Description |
-|------------|------------|-------------|
-| snippet_id | String | Unique identifier |
-| programming_language | String | Language of the code |
-| code_content | Text | User-provided code |
-| explanation | Text | AI-generated explanation |
-| uploaded_date | DateTime | Upload timestamp |
-| user_id | String | User identifier |
+Features:
+
+* Project introduction
+* Programming language selection
+* Code input area
+* Analyze button
 
 ---
 
-## 🛠️ Technology Stack
+## 2. Code Analysis Screen
 
-### Frontend
-- React.js
-- HTML5
-- CSS3
-- JavaScript
+Features:
 
-### Backend
-- Node.js
-- Express.js
-
-### Database
-- Supabase / PostgreSQL
-
-### AI Integration
-- OpenAI API / Gemini API
+* Code processing status
+* Analysis progress
 
 ---
 
-## 📈 Future Enhancements
+## 3. Results Screen
 
-- Voice explanations
-- Code visualization diagrams
-- Complexity analysis
-- Interactive learning mode
-- Debugging assistant
-- Personalized learning recommendations
+Displays:
 
----
-
-## 📷 Example Workflow
-
-1. User uploads or pastes code.
-2. AI analyzes the code structure.
-3. System generates detailed explanations.
-4. User receives easy-to-understand output.
-5. User learns and improves coding skills.
+* Code Summary
+* Line-by-Line Explanation
+* Logic Breakdown
+* Improvement Suggestions
+* Error Detection Insights
 
 ---
 
-## Project Goal
+## 4. About Screen
 
-To make programming education more accessible by helping users understand code faster through AI-powered explanations and learning assistance.
+Displays:
+
+* Project Overview
+* Features
+* Technology Stack
+* Developer Information
 
 ---
 
-## Developed By
+# Features
 
-**[smeara]**
+## Code Explanation
+
+Generates beginner-friendly explanations for source code.
+
+## Multi-Language Support
+
+Supported Languages:
+
+* Python
+* Java
+* JavaScript
+* C++
+* C#
+* PHP
+
+## Code Summary
+
+Provides a concise overview of the code functionality.
+
+## Logic Breakdown
+
+Explains how the code works internally.
+
+## Learning Assistance
+
+Helps users understand programming concepts.
+
+## Improvement Suggestions
+
+Recommends best coding practices and optimizations.
+
+## Error Detection
+
+Highlights possible issues and coding mistakes.
+
+---
+
+# AI Functionality
+
+## Input
+
+* Source Code Snippet
+* Programming Language
+
+## Processing
+
+The AI engine analyzes:
+
+* Variables
+* Functions
+* Loops
+* Conditional Statements
+* Classes and Objects
+* Code Structure
+
+## Output
+
+* Line-by-Line Explanation
+* Code Summary
+* Logic Breakdown
+* Suggestions
+* Potential Error Detection
+
+---
+
+# System Workflow
+
+User Pastes Code
+
+↓
+
+Language Selection
+
+↓
+
+AI Analysis Engine
+
+↓
+
+Code Interpretation
+
+↓
+
+Explanation Generation
+
+↓
+
+Results Dashboard
+
+---
+
+# Data Model
+
+## Entity: CodeSnippet
+
+| Field Name           | Data Type | Description             |
+| -------------------- | --------- | ----------------------- |
+| snippet_id           | String    | Unique Identifier       |
+| programming_language | String    | Programming Language    |
+| code_content         | Text      | User Code               |
+| explanation          | Text      | AI Explanation          |
+| analysis_result      | Text      | Complete Analysis       |
+| suggestions          | Text      | Improvement Suggestions |
+| errors_detected      | Text      | Potential Issues        |
+| uploaded_date        | DateTime  | Upload Timestamp        |
+| user_id              | String    | User Identifier         |
+
+---
+
+# Technology Stack
+
+## Frontend
+
+* React.js
+* HTML5
+* CSS3
+* JavaScript
+
+## Backend
+
+* Node.js
+* Express.js
+
+## Database
+
+* Supabase
+* PostgreSQL
+
+## AI Integration
+
+* OpenAI API
+* Gemini API
+
+---
+
+# Deliverables
+
+* Responsive Web Application
+* AI-Powered Code Explanation Engine
+* Code Analysis Dashboard
+* GitHub Repository
+* Project Documentation
+
+---
+
+# Future Enhancements
+
+* Voice Explanations
+* Code Visualization Diagrams
+* Complexity Analysis
+* Interactive Learning Mode
+* Debugging Assistant
+* Personalized Learning Recommendations
+
+---
+
+# Example Workflow
+
+1. User uploads or pastes source code.
+2. User selects programming language.
+3. AI analyzes code structure.
+4. System generates detailed explanations.
+5. User receives summaries, suggestions, and insights.
+6. User improves coding knowledge.
+
+---
+
+# Project Goal
+
+To make programming education more accessible by helping users understand code faster through AI-powered explanations, learning assistance, and intelligent code analysis.
+
+---
+
+# Developed By
+
+**Smeara**
 
 AI-Powered Educational Technology Project
