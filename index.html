@@ -3,395 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Explainer AI - Dashboard</title>
+    <title>Code Explainer AI - Dashboard Console</title>
     <style>
-        /* Modern Dark Theme Design System */
+        /* Modern High-Fidelity UI Styling Configuration */
         :root {
-            --bg-main: #0B0F19;
-            --bg-card: #151D30;
-            --accent-primary: #3B82F6;
-            --accent-hover: #2563EB;
-            --text-main: #F3F4F6;
-            --text-muted: #9CA3AF;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --border-color: #24324D;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --bg-dark: #0f172a;
+            --panel-dark: #1e293b;
+            --border-glow: #334155;
+            --text-light: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-green: #34d399;
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* Navigation Bar */
+        .app-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
         header {
-            background-color: var(--bg-card);
-            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-glow);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
         }
 
-        header h1 {
-            font-size: 1.5rem;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .branding h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            color: var(--accent-blue);
         }
 
-        header h1 span {
-            color: var(--accent-primary);
+        .branding p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin: 5px 0 0 0;
         }
 
         nav button {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            padding: 0.5rem 1rem;
+            background-color: transparent;
+            border: 1px solid var(--border-glow);
+            color: var(--text-light);
+            padding: 10px 20px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: color 0.2s;
+            border-radius: 6px;
+            font-weight: 500;
+            margin-left: 10px;
+            transition: all 0.2s ease;
         }
 
         nav button.active, nav button:hover {
-            color: var(--text-main);
-            border-bottom: 2px solid var(--accent-primary);
+            background-color: var(--accent-blue);
+            color: var(--bg-dark);
+            border-color: var(--accent-blue);
         }
 
-        /* App Layout Container */
-        main {
-            flex: 1;
-            padding: 2rem;
-            max-width: 1400px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .screen {
+        .screen-container {
+            background-color: var(--panel-dark);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 30px;
             display: none;
         }
 
-        .screen.active {
+        .screen-container.active {
             display: block;
         }
 
-        /* Home/Workspace Grid */
-        .workspace-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        @media (max-width: 900px) {
-            .workspace-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .panel {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .panel-title {
-            font-size: 1.2rem;
+        label {
+            display: block;
+            margin-bottom: 8px;
             font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            color: var(--text-dim);
         }
 
-        /* Form elements */
         select, textarea {
             width: 100%;
-            background-color: var(--bg-main);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 0.75rem;
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-glow);
+            color: var(--text-light);
+            padding: 12px;
             border-radius: 8px;
             font-size: 1rem;
-            outline: none;
+            box-sizing: border-box;
+            margin-bottom: 20px;
         }
 
         textarea {
-            font-family: 'Courier New', Courier, monospace;
-            resize: vertical;
-            min-height: 300px;
+            height: 250px;
+            font-family: 'Fira Code', Consolas, Monaco, monospace;
         }
 
-        select:focus, textarea:focus {
-            border-color: var(--accent-primary);
-        }
-
-        .btn {
-            background-color: var(--accent-primary);
-            color: white;
+        .submit-btn {
+            background-color: var(--accent-green);
+            color: var(--bg-dark);
+            font-weight: bold;
+            font-size: 1.1rem;
             border: none;
-            padding: 0.75rem 1.5rem;
+            width: 100%;
+            padding: 14px;
             border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
+            transition: opacity 0.2s;
         }
 
-        .btn:hover {
-            background-color: var(--accent-hover);
+        .submit-btn:hover {
+            opacity: 0.9;
         }
 
-        /* Processing/Loading Overlay state */
-        .loading-container {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            padding: 4rem 0;
-            grid-column: span 2;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--border-color);
-            border-top: 5px solid var(--accent-primary);
+        /* Loading Wheel Spinner Animation Settings */
+        .loader-spinner {
+            border: 4px solid var(--border-glow);
+            border-top: 4px solid var(--accent-blue);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            width: 40px;
+            height: 40px;
+            animation: rotationalSpin 1s linear infinite;
+            margin: 30px auto;
         }
 
-        @keyframes spin {
+        @keyframes rotationalSpin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
 
-        /* Results Tabs Layout */
-        .results-header-tabs {
-            display: flex;
-            gap: 0.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
+        .text-center { text-align: center; }
+
+        .results-block {
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-glow);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
         }
 
-        .tab-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .tab-btn.active {
-            background-color: var(--border-color);
-            color: var(--text-main);
-        }
-
-        .tab-content {
-            display: none;
-            line-height: 1.6;
-            font-size: 0.95rem;
-            white-space: pre-line;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .badge {
-            background-color: var(--border-color);
-            padding: 0.25rem 0.5rem;
+        .data-badge {
+            background-color: var(--border-glow);
+            color: var(--accent-blue);
+            display: inline-block;
+            padding: 4px 10px;
             border-radius: 4px;
             font-size: 0.8rem;
+            font-family: monospace;
+            margin-right: 10px;
+            margin-bottom: 10px;
         }
 
-        /* About Page styles */
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-        .about-content h2, .about-content h3 {
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .about-content ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
+        ul { margin-left: 20px; padding: 0; }
+        li { margin-bottom: 8px; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1><span>Code Explainer</span> AI</h1>
-        <nav>
-            <button id="nav-home" class="active" onclick="switchScreen('home')">Home Dashboard</button>
-            <button id="nav-about" onclick="switchScreen('about')">About System</button>
-        </nav>
-    </header>
+    <div class="app-wrapper">
+        <header>
+            <div class="branding">
+                <h1>Code Explainer AI</h1>
+                <p>AI-Powered Educational Technology Project Architecture</p>
+            </div>
+            <nav>
+                <button id="nav-home" class="active" onclick="navigateToScreen('home')">Home Screen</button>
+                <button id="nav-about" onclick="navigateToScreen('about')">About Screen</button>
+            </nav>
+        </header>
 
-    <main>
-        <div id="screen-home" class="screen active">
-            <div class="workspace-grid" id="main-workspace">
-                
-                <div class="panel">
-                    <div class="panel-title">
-                        Input Code Snippet
-                        <span class="badge" id="data-model-info">ID: Generated on analysis</span>
-                    </div>
-                    <div>
-                        <label style="display:block; margin-bottom: 0.5rem; color: var(--text-muted);">Select Target Language</label>
-                        <select id="lang-select">
-                            <option value="python">Python</option>
-                            <option value="javascript">JavaScript</option>
-                            <option value="java">Java</option>
-                            <option value="cpp">C++</option>
-                            <option value="csharp">C#</option>
-                            <option value="php">PHP</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label style="display:block; margin-bottom: 0.5rem; color: var(--text-muted);">Paste Code Here</label>
-                        <textarea id="code-input" placeholder="paste your system loops, variables, functions, or complex classes here..."></textarea>
-                    </div>
-                    <button class="btn" onclick="runCodeAnalysis()">⚡ Analyze & Explain Code</button>
+        <section id="screen-home" class="screen-container active">
+            <h2>Home Screen</h2>
+            <p style="color: var(--text-dim); margin-bottom: 25px;">Welcome to Code Explainer AI. Paste your source code snippets below to get instant AI summaries, logic flow breakdowns, and targeted bug analysis options.</p>
+            
+            <label for="programming_language">Programming Language Selection</label>
+            <select id="programming_language">
+                <option value="Python">Python</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Java">Java</option>
+                <option value="C++">C++</option>
+                <option value="C#">C#</option>
+                <option value="PHP">PHP</option>
+            </select>
+
+            <label for="code_content">Code Input Area</label>
+            <textarea id="code_content" placeholder="Paste source code logic blocks, nested variables, conditions, objects, or loops..."></textarea>
+            
+            <button id="analyze-button" class="submit-btn" onclick="executeAppEngineWorkflow()">⚡ Analyze Code</button>
+        </section>
+
+        <section id="screen-analysis" class="screen-container text-center">
+            <h2>Code Analysis Screen</h2>
+            <p style="color: var(--text-dim);">The parsing engine is reading variables, evaluation states, loops, and script classes internally...</p>
+            <div class="loader-spinner"></div>
+            <p style="color: var(--accent-blue); font-weight: bold;">Code Processing Status: Analysis Progress Running...</p>
+        </section>
+
+        <section id="screen-results" class="screen-container">
+            <h2>Results Screen</h2>
+            
+            <div style="margin-bottom: 20px;" id="entity-data-layer">
                 </div>
 
-                <div class="panel" id="results-panel" style="opacity: 0.6;">
-                    <div class="panel-title">
-                        AI Analysis Outputs
-                        <span class="badge" id="output-timestamp">Awaiting input...</span>
-                    </div>
-
-                    <div class="results-header-tabs">
-                        <button class="tab-btn active" onclick="switchTab(event, 'tab-summary')">Summary</button>
-                        <button class="tab-btn" onclick="switchTab(event, 'tab-line')">Line-by-Line</button>
-                        <button class="tab-btn" onclick="switchTab(event, 'tab-logic')">Logic Flow</button>
-                        <button class="tab-btn" onclick="switchTab(event, 'tab-improvements')">Suggestions</button>
-                        <button class="tab-btn" onclick="switchTab(event, 'tab-errors')">Bugs/Errors</button>
-                    </div>
-
-                    <div id="tab-summary" class="tab-content active">Your comprehensive code abstract, architectural outline, and basic execution goals will appear here once computation runs.</div>
-                    <div id="tab-line" class="tab-content">An atomized line-by-line semantic breakdown of definitions, declarations, operations, and states will step out here.</div>
-                    <div id="tab-logic" class="tab-content">Structural conditional loops, system data mutations, dynamic routing configurations, and structural object operations tracking maps here.</div>
-                    <div id="tab-improvements" class="tab-content">System optimization metrics, cleaner formatting variants, performance considerations, and styling enhancements appear here.</div>
-                    <div id="tab-errors" class="tab-content">Algorithmic flaws, syntactic slip-ups, resource leakage warnings, or execution risk boundaries surface here.</div>
-                </div>
-
+            <div class="results-block">
+                <h3>Code Summary</h3>
+                <div id="explanation_output"></div>
             </div>
 
-            <div class="loading-container" id="loading-screen">
-                <div class="spinner"></div>
-                <h2>AI Processing Engine Online...</h2>
-                <p style="color: var(--text-muted);">Parsing scopes, processing expressions, and optimizing instructional structures.</p>
+            <div class="results-block">
+                <h3>Line-by-Line Explanation</h3>
+                <div id="analysis_result_output"></div>
             </div>
-        </div>
 
-        <div id="screen-about" class="screen">
-            <div class="panel about-content">
-                <h2>About Code Explainer AI</h2>
-                <p>Code Explainer AI is an AI-powered educational technology platform engineered to demystify code architectures, accelerate logic workflows, and augment engineering insights for both student structures and senior application layers.</p>
-                
-                <h3>Core Framework Tech Stack</h3>
-                <ul>
-                    <li><strong>Frontend Structure:</strong> React.js, Web-Semantic Core HTML5, Variable CSS3 Engine</li>
-                    <li><strong>Backend Layers:</strong> Node.js Ecosystem with Express Framework</li>
-                    <li><strong>Storage / DB Matrix:</strong> Supabase Layer utilizing PostgreSQL Infrastructure</li>
-                    <li><strong>Cognitive Framework Engine:</strong> Open-Engine API Pipelines (Gemini / OpenAI API)</li>
-                </ul>
-
-                <h3>Developer Verification</h3>
-                <p><strong>Lead Engineering Architect:</strong> Smeara</p>
-                <p style="color: var(--accent-primary); font-weight: bold; margin-top: 1rem;">Version 1.0.0 Base Foundation Installed Successfully.</p>
+            <div class="results-block">
+                <h3>Logic Breakdown</h3>
+                <div id="logic_breakdown_output"></div>
             </div>
-        </div>
-    </main>
+
+            <div class="results-block">
+                <h3>Improvement Suggestions</h3>
+                <div id="suggestions_output"></div>
+            </div>
+
+            <div class="results-block">
+                <h3>Error Detection Insights</h3>
+                <div id="errors_detected_output"></div>
+            </div>
+
+            <button class="submit-btn" style="background-color: var(--border-glow); color: white; margin-top: 20px;" onclick="navigateToScreen('home')">← Analyze Another Code Snippet</button>
+        </section>
+
+        <section id="screen-about" class="screen-container">
+            <h2>About Screen</h2>
+            <h3>Project Overview</h3>
+            <p>Code Explainer AI is designed to simplify programming education and accelerate the learning process for coding bootcamp learners, software engineering interns, and programming students working through complex syntax blocks.</p>
+            
+            <h3>Features Matrix</h3>
+            <ul>
+                <li>Multi-Language Parsing (Python, Java, JavaScript, C++, C#, PHP)</li>
+                <li>Concise Code Summary Generation Engine</li>
+                <li>Line-by-Line Instruction Mapping & Internal Logic Breakdowns</li>
+                <li>Proactive Bug Checking and Automated Best Practice Suggestions</li>
+            </ul>
+
+            <h3>Technology Stack Details</h3>
+            <ul>
+                <li><strong>Frontend Architecture:</strong> Responsive Native Framework (HTML5 / CSS3 / JavaScript Ecosystem)</li>
+                <li><strong>Backend core:</strong> Node.js Layer running Express.js Platforms</li>
+                <li><strong>Database / Storage Infrastructure:</strong> Supabase Framework holding PostgreSQL Engine Instances</li>
+                <li><strong>AI Core Matrix Pathways:</strong> OpenAI API Configurations & Gemini API Access Ports</li>
+            </ul>
+
+            <p style="margin-top: 25px;"><strong>Developer Information:</strong> Created By Smeara</p>
+        </section>
+    </div>
 
     <script>
-        // Screen Navigation Layer
-        function switchScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+        // Core View Router Switching Functions
+        function navigateToScreen(targetScreenId) {
+            document.querySelectorAll('.screen-container').forEach(screen => screen.classList.remove('active'));
+            document.getElementById('screen-' + targetScreenId).classList.add('active');
             
-            document.getElementById(`screen-${screenId}`).classList.add('active');
-            document.getElementById(`nav-${screenId}`).classList.add('active');
+            document.getElementById('nav-home').classList.remove('active');
+            document.getElementById('nav-about').classList.remove('active');
+            
+            if(document.getElementById('nav-' + targetScreenId)) {
+                document.getElementById('nav-' + targetScreenId).classList.add('active');
+            }
         }
 
-        // Tab Filtering Controls within the Results Layer
-        function switchTab(event, tabId) {
-            const container = event.target.closest('.panel');
-            container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            
-            event.target.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-        }
+        // Processing Pipeline Trigger Logic Simulation
+        function executeAppEngineWorkflow() {
+            const rawContentInput = document.getElementById('code_content').value.trim();
+            const languageSelected = document.getElementById('programming_language').value;
 
-        // Core App Intelligence Pipeline Mock Simulation
-        function runCodeAnalysis() {
-            const rawInput = document.getElementById('code-input').value.trim();
-            const languageSelected = document.getElementById('lang-select').value;
-            
-            if(!rawInput) {
-                alert("Please drop a code sample before requesting analysis!");
+            if(!rawContentInput) {
+                alert("Please drop a valid source snippet in the workspace container block before analyzing!");
                 return;
             }
 
-            // Fire and transition to the AI Processing/Loading Screen State
-            const workspace = document.getElementById('main-workspace');
-            const loader = document.getElementById('loading-screen');
-            
-            workspace.style.display = 'none';
-            loader.style.display = 'flex';
+            // Transit view into Code Analysis Screen
+            navigateToScreen('analysis');
 
+            // Establish timer buffer imitating server response delay metrics
             setTimeout(() => {
-                // Return to main layout grid and enable full brightness opacity control
-                loader.style.display = 'none';
-                workspace.style.display = 'grid';
-                
-                const resultsPanel = document.getElementById('results-panel');
-                resultsPanel.style.opacity = '1';
+                // Initialize object properties matching data model variables explicitly
+                const mockDataModelInstance = {
+                    snippet_id: "SNIP-" + Math.floor(100000 + Math.random() * 900000),
+                    programming_language: languageSelected,
+                    code_content: rawContentInput,
+                    explanation: `Provides a concise overview of the code functionality. This ${languageSelected} block configures operational parameters to evaluate conditional criteria and modify system variables inside isolated scope blocks safely.`,
+                    analysis_result: `<p>• <strong>Declaration Segment:</strong> Allocates functional properties and scopes context bindings structural arrays.<br>• <strong>Operational Loop:</strong> Steps through sequential calculations executing condition checks iteratively until limits match.</p>`,
+                    logic_breakdown: `<p>Explains how the code works internally. Data initialization ➔ Conditional iterative parsing loop validation ➔ Scope resolution stack yield.</p>`,
+                    suggestions: `<p>Recommends best coding practices and optimizations. Restructure loop definitions to lower tracking complexity metrics and add robust documentation tags across methods.</p>`,
+                    errors_detected: `<p>Highlights possible issues and coding mistakes. Analysis checks complete: 0 structural errors, missing boundary braces, or infinite loops discovered.</p>`,
+                    uploaded_date: new Date().toISOString(),
+                    user_id: "USR-SMEARA-4821"
+                };
 
-                // Data Model Generation Mapping properties match requirements spec 
-                const mockId = "snip_" + Math.random().toString(36).substr(2, 9);
-                const currentTimestamp = new Date().toLocaleString();
+                // Output field layout data markers matching the schema properties directly
+                document.getElementById('entity-data-layer').innerHTML = `
+                    <span class="data-badge">snippet_id: ${mockDataModelInstance.snippet_id}</span>
+                    <span class="data-badge">programming_language: ${mockDataModelInstance.programming_language}</span>
+                    <span class="data-badge">user_id: ${mockDataModelInstance.user_id}</span>
+                    <span class="data-badge">uploaded_date: ${mockDataModelInstance.uploaded_date}</span>
+                `;
 
-                document.getElementById('data-model-info').innerText = `Snippet ID: ${mockId}`;
-                document.getElementById('output-timestamp').innerText = `Analyzed: ${currentTimestamp}`;
+                document.getElementById('explanation_output').innerHTML = mockDataModelInstance.explanation;
+                document.getElementById('analysis_result_output').innerHTML = mockDataModelInstance.analysis_result;
+                document.getElementById('logic_breakdown_output').innerHTML = mockDataModelInstance.logic_breakdown;
+                document.getElementById('suggestions_output').innerHTML = mockDataModelInstance.suggestions;
+                document.getElementById('errors_detected_output').innerHTML = mockDataModelInstance.errors_detected;
 
-                // Inject structured smart analysis contextual logic matching code depth content
-                document.getElementById('tab-summary').innerHTML = `<strong>Project Type:</strong> Language Specific Processing Engine (${languageSelected.toUpperCase()})\n\n<strong>Overview:</strong> This script defines automated computation parameters. It structures operational logical blocks inside localized execution scopes designed to parse arrays or target attributes asynchronously.`;
-                
-                document.getElementById('tab-line').innerHTML = `• <strong>Segment 1:</strong> Variables & Memory allocations are evaluated to retain stack tracking contexts.\n• <strong>Segment 2:</strong> Algorithmic loops / function checkpoints establish clear, repetitive runtime constraints.\n• <strong>Segment 3:</strong> Scope Return / Yield handles standard lifecycle resolution cleanly.`;
-                
-                document.getElementById('tab-logic').innerHTML = `<strong>Workflow Chart Lineage:</strong>\nInput Data Variable Injection ➔ Structural Evaluation Loop ➔ Logic Flag validation check ➔ Resolution Yield.`;
-                
-                document.getElementById('tab-improvements').innerHTML = `1. Consider refactoring structural declarations to scale down memory profiling metrics.\n2. Modularize inline expressions out into functional helpers to optimize code readability rules.`;
-                
-                document.getElementById('tab-errors').innerHTML = `✅ <strong>Diagnostic Integrity Checked:</strong> No critical infinite syntax loops or pointer breaks discovered inside the analysis stack window during this run block. Everything looks stable!`;
-
-            }, 1200); // Quick turnaround time mimicking low latency API endpoints.
+                // Move directly into Results Screen panel mapping container
+                navigateToScreen('results');
+            }, 1100);
         }
     </script>
 </body>
